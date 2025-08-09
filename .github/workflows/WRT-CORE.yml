@@ -184,7 +184,10 @@ jobs:
           cd ./wrt/
 
           make download -j$(nproc)
-
+      
+      - name: Compile dae (skip hash check)
+        run: make package/dae/compile IGNORE_HASH=1
+      
       - name: Compile Firmware
         if: env.WRT_TEST != 'true'
         run: |
@@ -266,3 +269,4 @@ jobs:
 
             内核版本：${{env.WRT_KVER}}
             插件列表：${{env.WRT_LIST}}
+
